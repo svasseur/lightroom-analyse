@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project
 
-Lightroom Classic plug-in (Lua, Lightroom SDK) that sends photo previews to a local Ollama vision model (default `qwen2.5vl:3b`) and adds the returned tags as keywords. All plug-in code lives in `OllamaTagger.lrplugin/`; user-facing strings, comments and the README are in French.
+Lightroom Classic plug-in (Lua, Lightroom SDK) that sends photo previews to a local Ollama vision model (default `qwen2.5vl:7b`) and adds the returned tags as keywords. It only ever adds keywords and must never remove existing ones. All plug-in code lives in `OllamaTagger.lrplugin/`; user-facing strings, comments and the README are in French.
 
 ## Commands
 

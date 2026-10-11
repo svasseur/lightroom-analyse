@@ -2,15 +2,16 @@
 
 **Mots-clés automatiques par IA, 100 % en local.**
 
-Ollama Tagger est un module externe (plug-in) pour **Adobe Lightroom Classic**. Il analyse vos photos avec un modèle de vision qui tourne sur votre machine via [Ollama](https://ollama.com), par exemple `qwen2.5vl:3b`, puis ajoute automatiquement des mots-clés décrivant ce qu'il voit : sujet, objets, lieu, ambiance, couleurs…
+Ollama Tagger est un module externe (plug-in) pour **Adobe Lightroom Classic**. Il analyse vos photos avec un modèle de vision qui tourne sur votre machine via [Ollama](https://ollama.com), par exemple `qwen2.5vl:7b`, puis ajoute automatiquement des mots-clés décrivant ce qu'il voit : sujet, objets, lieu, ambiance, couleurs…
 
 - 🔒 **Confidentialité** : aucune photo ne quitte votre ordinateur. Pas de cloud, pas de clé d'API, pas d'abonnement.
 - ⚡ **Aperçus dynamiques** : fonctionne même quand les originaux sont hors ligne (disque externe débranché). L'analyse se fait alors à partir des aperçus dynamiques (smart previews).
 - 🌍 **Français ou anglais** pour les mots-clés.
 - 🗂️ **Mots-clés rangés** sous un mot-clé parent (`IA` par défaut), faciles à filtrer, renommer ou supprimer.
+- 🛡️ **Non destructif** : le plug-in ajoute des mots-clés mais ne supprime jamais ceux qui existent déjà.
 - 🔁 **Reprise** : les photos déjà analysées sont marquées et ignorées au passage suivant.
 
-> 🇬🇧 *Lightroom Classic plug-in that auto-tags your photos using a local vision model served by Ollama (e.g. `qwen2.5vl:3b`). Works with Smart Previews, nothing leaves your machine. Keywords in French or English. See [English quick start](#english-quick-start).*
+> 🇬🇧 *Lightroom Classic plug-in that auto-tags your photos using a local vision model served by Ollama (e.g. `qwen2.5vl:7b`). Works with Smart Previews, nothing leaves your machine, existing keywords are never removed. Keywords in French or English. See [English quick start](#english-quick-start).*
 
 ---
 
@@ -30,23 +31,24 @@ Ollama Tagger est un module externe (plug-in) pour **Adobe Lightroom Classic**. 
 
 ## Exemple
 
-Portrait en noir et blanc analysé avec `qwen2.5vl:3b`, en environ 1 seconde sur un Mac Apple Silicon une fois le modèle chargé :
+Photo analysée avec `qwen2.5vl:7b` : le plug-in a ajouté `bâtiment`, `carré`, `cercle`, `eau`, `hommes`, `pavé`, `pierres`, `rue`, `sculpture`, `sombre` et le marqueur `ia-analysé`. Les mots-clés déjà présents sur la photo (`La Rochelle`, `LensTagger`) sont **conservés**.
 
-| Langue | Mots-clés générés |
-|---|---|
-| Français | `homme`, `main`, `regard`, `fond-noir`, `photographie`, `personne`, `nature`, `sombre` |
-| English | `person`, `hand`, `black and white`, `close-up`, `expression`, `dark background`, `serene`, `monochrome`, `intense`, `focus` |
+<p align="center">
+  <img src="docs/exemple-mots-cles.png" alt="Photo dans Lightroom Classic avec les mots-clés générés par Ollama Tagger à côté des mots-clés existants" width="800">
+</p>
 
-Dans Lightroom, ils apparaissent ainsi dans la liste des mots-clés :
+Dans la liste des mots-clés, les mots-clés générés sont rangés sous le parent `IA` :
 
 ```
 IA
- ├─ fond-noir
- ├─ homme
- ├─ main
+ ├─ bâtiment
+ ├─ cercle
+ ├─ sculpture
  └─ …
 ia-analysé
 ```
+
+> ℹ️ **Le plug-in ne supprime jamais de mots-clés.** Il ne fait qu'en ajouter : vos mots-clés existants restent intacts, même si vous relancez l'analyse sur une photo.
 
 ## Prérequis
 
@@ -54,9 +56,9 @@ ia-analysé
 |---|---|
 | Adobe Lightroom Classic | 6 ou plus récent (macOS ou Windows) |
 | [Ollama](https://ollama.com/download) | 0.5 ou plus récent (requis pour les réponses structurées en JSON) |
-| Un modèle de vision | `qwen2.5vl:3b` recommandé (~3,2 Go) |
+| Un modèle de vision | `qwen2.5vl:7b` recommandé (~6 Go), ou `qwen2.5vl:3b` (~3,2 Go) pour les machines modestes |
 
-Prévoyez **8 Go de RAM** au minimum pour `qwen2.5vl:3b`. Un GPU ou une puce Apple Silicon accélère beaucoup l'analyse.
+Prévoyez **16 Go de RAM** pour `qwen2.5vl:7b`, ou 8 Go pour `qwen2.5vl:3b`. Un GPU ou une puce Apple Silicon accélère beaucoup l'analyse.
 
 ## Installation
 
@@ -65,7 +67,7 @@ Prévoyez **8 Go de RAM** au minimum pour `qwen2.5vl:3b`. Un GPU ou une puce App
 Téléchargez Ollama depuis [ollama.com/download](https://ollama.com/download), lancez-le, puis dans un terminal :
 
 ```sh
-ollama pull qwen2.5vl:3b
+ollama pull qwen2.5vl:7b
 ```
 
 Vérifiez que le serveur répond :
@@ -108,7 +110,7 @@ Les réglages se trouvent dans **Fichier › Gestionnaire de modules externes �
 | Réglage | Défaut | Description |
 |---|---|---|
 | URL du serveur | `http://localhost:11434` | Adresse d'Ollama. Peut pointer vers une autre machine du réseau. |
-| Modèle | `qwen2.5vl:3b` | N'importe quel modèle de vision installé dans Ollama. |
+| Modèle | `qwen2.5vl:7b` | N'importe quel modèle de vision installé dans Ollama. |
 | Délai max / photo | `180` s | Temps maximum d'attente de la réponse du modèle. |
 | Langue des mots-clés | Français | Français ou English. |
 | Nombre max de mots-clés | `10` | Entre 1 et 50. |
@@ -133,14 +135,14 @@ Tout modèle Ollama capable de traiter des images (capacité *vision*) fonctionn
 
 | Modèle | Taille | Remarques |
 |---|---|---|
-| `qwen2.5vl:3b` | ~3 Go | Bon compromis vitesse/qualité, recommandé pour démarrer. |
-| `qwen2.5vl:7b` | ~6 Go | Plus précis, surtout en français. |
+| `qwen2.5vl:7b` | ~6 Go | **Par défaut.** Précis, bons mots-clés en français. |
+| `qwen2.5vl:3b` | ~3 Go | Plus rapide et plus léger, mais moins précis en français. |
 | `gemma3:4b` | ~3 Go | Bonne alternative multilingue. |
 | `llava:7b` | ~4,5 Go | Classique, plutôt à utiliser en anglais. |
 | `minicpm-v` | ~5 Go | Bon sur les détails. |
 
 ```sh
-ollama pull qwen2.5vl:7b
+ollama pull qwen2.5vl:3b
 ```
 
 Indiquez ensuite le nom exact du modèle dans les réglages du plug-in.
@@ -154,7 +156,7 @@ Lightroom ──► aperçu JPEG (1024 px) ──► base64 ──► Ollama /ap
 1. Le plug-in demande à Lightroom un JPEG de la photo avec `photo:requestJpegThumbnail()`. Lightroom utilise le meilleur aperçu disponible : l'original s'il est accessible, sinon **l'aperçu dynamique**.
 2. L'image est encodée en base64 et envoyée à l'API `POST /api/chat` d'Ollama. Un schéma JSON impose la forme de la réponse.
 3. Les tags sont nettoyés : mis en minuscules, dédoublonnés, débarrassés des caractères `, ; |`, et limités en nombre.
-4. Ils sont créés ou réutilisés sous le mot-clé parent, puis associés à la photo. Chaque photo est enregistrée dans le catalogue dès qu'elle est traitée.
+4. Ils sont créés ou réutilisés sous le mot-clé parent, puis **ajoutés** à la photo. Les mots-clés existants ne sont jamais retirés. Chaque photo est enregistrée dans le catalogue dès qu'elle est traitée.
 
 ### Structure du dépôt
 
@@ -179,7 +181,7 @@ OllamaTagger.lrplugin/
 | « aperçu indisponible » | L'original est hors ligne et il n'existe pas d'aperçu dynamique. Reconnectez le disque ou créez les aperçus dynamiques. |
 | Très lent sur la première photo | C'est normal : le modèle se charge en mémoire. Les photos suivantes sont beaucoup plus rapides. |
 | Délai dépassé | Augmentez le délai max, réduisez la taille de l'aperçu ou choisissez un modèle plus léger. |
-| Mots-clés peu pertinents ou mal traduits | Essayez un modèle plus gros (`qwen2.5vl:7b`), passez en anglais ou adaptez le prompt. |
+| Mots-clés peu pertinents ou mal traduits | Essayez un modèle plus gros (`qwen2.5vl:32b` si votre machine le permet), passez en anglais ou adaptez le prompt. |
 | Ollama sur une autre machine | Sur cette machine, lancez Ollama avec `OLLAMA_HOST=0.0.0.0` et mettez son adresse IP dans les réglages. |
 
 Le journal détaillé se trouve dans :
@@ -207,12 +209,12 @@ Pour signaler un bug, joignez si possible votre version de Lightroom, celle d'Ol
 
 ## English quick start
 
-1. Install [Ollama](https://ollama.com/download) and pull a vision model: `ollama pull qwen2.5vl:3b`.
+1. Install [Ollama](https://ollama.com/download) and pull a vision model: `ollama pull qwen2.5vl:7b`.
 2. Download this repository and put `OllamaTagger.lrplugin` in a permanent location.
 3. In Lightroom Classic: **File › Plug-in Manager… › Add**, pick `OllamaTagger.lrplugin`. Set *Langue des mots-clés* to **English** and click *Tester la connexion* (Test connection).
 4. In the Library module, select photos, then **Library › Plug-in Extras › Analyser la sélection avec Ollama…**
 
-Keywords are added under an `IA` parent keyword. Analyzed photos get an `ia-analysé` marker keyword so they are skipped on the next run. Everything runs locally, and Smart Previews are used when originals are offline.
+Keywords are added under an `IA` parent keyword. Existing keywords are never removed. Analyzed photos get an `ia-analysé` marker keyword so they are skipped on the next run. Everything runs locally, and Smart Previews are used when originals are offline.
 
 *The user interface is currently in French. English translation PRs are welcome!*
 

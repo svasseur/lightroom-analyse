@@ -1,7 +1,7 @@
 -- Valeurs par défaut des préférences du plug-in.
 return {
 	ollamaUrl = "http://localhost:11434",
-	model = "qwen2.5vl:3b",
+	model = "qwen2.5vl:7b",
 	language = "fr",           -- "fr" ou "en"
 	maxTags = 10,
 	previewSize = 1024,        -- côté long (px) de l'image envoyée au modèle
