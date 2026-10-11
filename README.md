@@ -101,6 +101,10 @@ curl http://localhost:11434/api/tags
 
 Les réglages se trouvent dans **Fichier › Gestionnaire de modules externes › Ollama Tagger**.
 
+<p align="center">
+  <img src="docs/parametres.png" alt="Panneau de réglages d'Ollama Tagger dans le gestionnaire de modules externes de Lightroom Classic" width="650">
+</p>
+
 | Réglage | Défaut | Description |
 |---|---|---|
 | URL du serveur | `http://localhost:11434` | Adresse d'Ollama. Peut pointer vers une autre machine du réseau. |
