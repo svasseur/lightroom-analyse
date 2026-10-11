@@ -134,13 +134,13 @@ Réponds uniquement en JSON : {"tags": ["..."]}
 
 Tout modèle Ollama capable de traiter des images (capacité *vision*) fonctionne. Quelques pistes :
 
-| Modèle | Taille | Remarques |
-|---|---|---|
-| `qwen2.5vl:7b` | ~6 Go | **Par défaut.** Précis, bons mots-clés en français. |
-| `qwen2.5vl:3b` | ~3 Go | Plus rapide et plus léger, mais moins précis en français. |
-| `gemma3:4b` | ~3 Go | Bonne alternative multilingue. |
-| `llava:7b` | ~4,5 Go | Classique, plutôt à utiliser en anglais. |
-| `minicpm-v` | ~5 Go | Bon sur les détails. |
+| Modèle         | Taille   | Remarques                                                                            |
+| -------------- | -------- | ------------------------------------------------------------------------------------ |
+| `qwen2.5vl:7b` | \~6 Go   | **Par défaut.** Précis, bons mots-clés en français.                                  |
+| `qwen2.5vl:3b` | \~3 Go   | Plus rapide et plus léger, mais moins précis en français. ( 7 secondes par photos )  |
+| `gemma3:4b`    | \~3 Go   | Bonne alternative multilingue.                                                       |
+| `llava:7b`     | \~4,5 Go | Classique, plutôt à utiliser en anglais.                                             |
+| `minicpm-v`    | \~5 Go   | Bon sur les détails.                                                                 |
 
 ```sh
 ollama pull qwen2.5vl:3b
