@@ -21,10 +21,6 @@ return {
 			file = "AnalyzeMenuItem.lua",
 			enabledWhen = "photosSelected",
 		},
-		{
-			title = "Tester la connexion à Ollama",
-			file = "TestConnectionMenuItem.lua",
-		},
 	},
 
 	LrExportMenuItems = {

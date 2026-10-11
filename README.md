@@ -166,7 +166,6 @@ OllamaTagger.lrplugin/
 ├── AnalyzeMenuItem.lua         # Boucle d'analyse, progression, écriture des mots-clés
 ├── OllamaClient.lua            # Prompt, appel HTTP à Ollama, analyse de la réponse
 ├── PluginInfoProvider.lua      # Panneau de réglages
-├── TestConnectionMenuItem.lua  # Menu « Tester la connexion »
 ├── Defaults.lua                # Valeurs par défaut des préférences
 ├── Init.lua                    # Initialisation des préférences
 └── JSON.lua                    # Encodeur/décodeur JSON en Lua pur
