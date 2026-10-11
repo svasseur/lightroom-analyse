@@ -27,6 +27,7 @@ Ollama Tagger est un module externe (plug-in) pour **Adobe Lightroom Classic**. 
 - [Dépannage](#dépannage)
 - [Contribuer](#contribuer)
 - [English quick start](#english-quick-start)
+- [Auteur](#auteur)
 - [Licence](#licence)
 
 ## Exemple
@@ -216,6 +217,10 @@ Pour signaler un bug, joignez si possible votre version de Lightroom, celle d'Ol
 Keywords are added under an `IA` parent keyword. Existing keywords are never removed. Analyzed photos get an `ia-analysé` marker keyword so they are skipped on the next run. Everything runs locally, and Smart Previews are used when originals are offline.
 
 *The user interface is currently in French. English translation PRs are welcome!*
+
+## Auteur
+
+Développé par **Sébastien Vasseur**, photographe. Retrouvez mes photos sur Instagram : [@svasseur](https://www.instagram.com/svasseur).
 
 ## Licence
 
